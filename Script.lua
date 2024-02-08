@@ -9,14 +9,15 @@ playSound(string path to sound)
 ]]--
 
 entered = false 
-
+sword  = false
 castSpellLib = false 
-
+demonring = false
   
 
 function story(aName) 
 
     if aName == "start" then 
+    playSound("intro.wav")
 
         playMusic("background.wav") 
 
@@ -50,7 +51,7 @@ function story(aName)
 
      elseif aName == "woods" then  
 
-            --("storm.wav") 
+         playSound("storm.wav") 
             CLS()
 
             setBackground("afstant.jpg") 
@@ -62,7 +63,10 @@ function story(aName)
             createButton("look", "Get closer") 
 
       elseif aName == "look" then
+
+         playSound("blaadjes.WAV")
             CLS()
+        
           setBackground("heks in het bos.jpg")
           createTextfield("helloooooo what are you doing here?")
           createButton("truth", "im lost ")
@@ -73,9 +77,65 @@ function story(aName)
       playSound("doodgaan.wav")
       setBackground("death.jpg")
 
+      elseif aName == "truth" then 
+      CLS()
+      setBackground("heks hut.jpg")
+      createTextfield("oh come follow me to my home")
+      createButton("witch","ofcource")
+      createButton("lie","i don't need your help")
+
+      elseif aName == "witch" then 
+      CLS()
+      playSound("witch house.wav")
+      setBackground("binnekant.jpg")
+      createTextfield("sit down ill get us something to drink")
+      createButton("drink","(say nothing)")
+      createButton("drink niet","friendly decline")
+
+     elseif aName == "drink" then
+     CLS()
+     playSound("bier.wav")
+     setBackground("drinken.jpg")
+     createTextfield("this tastes really good")
+     createButton("lie","i feel really sleepy im gonna pass out")
+
+     elseif aName == "drink niet" then
+     CLS()
+     setBackground("sword on wall.jpg")
+     createTextfield("im gonna head out for a little bit dont touch anything!")
+     createButton("grab","grab the sword on the wall next to you")
+     createButton("run","i think there was poison    RUNNNN")
+
+     elseif aName == "run" then 
+      exitGame()
+
+     elseif aName == "grab" then 
+     sword = true
+     CLS()
+     setBackground("witch home.png")
+     createTextfield("what are you doing with my stuff PUT IT DOWN NOWWW!!")
+     createButton("entrance","try and run to the house")
+     createButton("kil","try and fight the witch")
+
+     elseif aName == "kil" then 
+     CLS()
+     setBackground("domain1.jpg")
+     createTextfield("she just used a domain expesion forest of death")
+     createButton("cool","use you own domain")
+     createButton("lie","rush her with the sword")
+
+     elseif aName == "cool" then 
+     CLS()
+     setBackground("mickey.jpg")
+     playSound("mickey.wav")
+     createTextfield("u destroyed that pethetic old woman (you can go back)")
+     createButton("entrance","go to the house")
+
+
+     
 
     elseif aName == "left room" then 
-    --setBackground("")
+    --setBackground("hell.jpg")
 
         playSound("footstep.wav") 
 
@@ -102,32 +162,82 @@ function story(aName)
         createTextfield("you found a secret entrence will you enter") 
         createButton("dungeon","you go discover whats down there")
         createButton("entrance", "You go back to the corridor") 
-
+       
       elseif aName == "dungeon" then
+      CLS()
+        playSound("trap af.wav")
         setBackground("stairs.jpg")
+      
+        createTextfield("its a long way down will you continue?")
+        createButton("left room","no")
+        createButton("grot","yes")
+
+        elseif aName == "grot" then
+        CLS()
+        playSound("countdown.wav")
+        setBackground("secret item.jpg")
+        createTextfield("you hear something omineus calling you toward it                                                  and you cannot escape its grasp")
+        createButton("ring","walk towards it")
+        createButton("ring","walk towards it")
+
+        elseif aName == "ring" then
+        CLS()
+        setBackground("closer.jpg")
+        createTextfield("as you walk towards it you see somthing shining in the bowl                                       (you still cant leave)")
+        createButton("gem","look inside the bowl")
+
+        elseif aName == "gem" then 
+        CLS()
+        setBackground("gym.jpg")
+        createButton("left room","grab ring and go back")
+        demonring = true 
+        createButton("sad","don't take the ring")
+
+        elseif aName == "sad" then 
+        CLS()
+        playSound("splat.wav")
+        setBackground("death.jpg")
+        createTextfield("the ring consumes you as you try and walk away")
 
 
     elseif aName == "right room" then 
 
         CLS() 
-        playsound("")
+        playSound("hell2.wav")
+        setBackground("hell.jpg") 
 
+        createTextfield("             what is it that you see infront of you is that                                                          THE GATE OF HELLLLLLLL.")
 
-        playSound("footstep.wav") 
+        createButton("entrance", "this is not a place i should be at i better leave") 
+        createButton("go in","i wonder how hell looks")
+        elseif aName == "go in" then 
+        CLS()
+        setBackground("entrance hell.jpg")
+        playSound("hell sound.wav")
+        createTextfield("holy shit you actualy made it into hell")
+        createButton("right room","damn its hot in here i should leave")
+        createButton("keep going","im not scared ill kill anything that comes in my way")
 
-        setBackground("rightHallway.jpg") 
+        elseif aName == "keep going" then 
+        CLS()
+        setBackground("hell boss.jpg")
+        playSound("grawl.wav")
+        createTextfield("you see a giant fucking monster that can only be described as                         satan himself suddenly something you where holding                                   start shining ")
 
-        if castSpellLib then 
+        if sword == true then 
 
-            createTextfield("The old living room has a green flare to it") 
+            createButton("kill","use the sword excaliber to slay the beast")
 
-        else 
+        else
 
-            createTextfield("You enter an old living room. Even though the place looked entirely abandoned, the fire is somehow lit.") 
-
-        end 
-
-        createButton("entrance", "You warm up at the fire and leave the room") 
+            createButton("lie","try and run away")
+        end
+       elseif aName == "kill" then 
+       CLS()
+       setBackground("victory.png")
+       playSound("winnn.wav")
+       createTextfield("as you slay the giant beast from                                                     hell you regain your memories")
+       createButton("exit","go home")
 
         if hasSpell and not castSpellLib then 
 
@@ -182,6 +292,12 @@ function story(aName)
         createButton("Brainroom", "Open eyes") 
 
         createButton("stay", "Lay still") 
+        elseif aName == "stay" then 
+        CLS()
+        setBackground("sucked.jpg")
+        createTextfield("u have been sucked dry")
+        createButton("lie","accept your fate")
+
 
     elseif aName == "Brainroom" then 
     CLS()
@@ -189,11 +305,25 @@ function story(aName)
         setBackground("nieuwe.jpg") 
 
         createTextfield("This is where you will stay with me") 
+        createButton("repel","no this cant be happening")
+        createButton("lie","accept you fate")
 
-    else 
-
-        setBackground("donker.jpg")  
-
+        elseif aName == "repel" then 
+       CLS()
+       setBackground("never.jpg")
+       createTextfield("she comes closer a you hear something wisper in your ear                                               it says hold your hand up")
+       if demonring == true then 
+       createButton("king of hell","use the ring to repel her")
+        else
+       createButton("lie","hold your hand up") 
+       end
+       elseif aName == "king of hell" then 
+       CLS()
+       playSound("bright.wav")
+       setBackground("light.jpg")
+       createTextfield("you see nothing biut you know something is happening")
+       --createButton
+       
     end 
 
   
